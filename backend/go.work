@@ -1,0 +1,8 @@
+go 1.23.2
+
+use (
+	./client
+	./common
+	./server1
+	./server2
+)

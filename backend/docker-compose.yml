@@ -1,0 +1,36 @@
+services:
+  server1:
+    build:
+      context: .
+      dockerfile: server1/Dockerfile
+    ports:
+      - "8100:8100"
+    restart: always
+    networks:
+      - app-network
+
+  server2:
+    build:
+      context: .
+      dockerfile: server2/Dockerfile
+    ports:
+      - "8200:8200"
+    restart: always
+    networks:
+      - app-network
+
+  client:
+    build:
+      context: .
+      dockerfile: client/Dockerfile
+    depends_on:
+      - server1
+      - server2
+    stdin_open: true
+    tty: true
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
